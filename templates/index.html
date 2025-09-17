@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Mindful Mentor · Home{% endblock %}
+{% block content %}
+<section class="hero">
+	<div class="hero-copy">
+		<h1>Your calm, personalized.</h1>
+		<p>Reflect in your private journal. Get instant insights and gentle recommendations—no accounts, no tracking.</p>
+		<a class="btn btn-primary" href="{{ url_for('journal') }}">Start journaling</a>
+	</div>
+	<div class="hero-art" aria-hidden="true">
+		<div class="blob b1"></div>
+		<div class="blob b2"></div>
+		<div class="blob b3"></div>
+	</div>
+</section>
+
+<section class="cards">
+	<div class="card">
+		<h3>Private by design</h3>
+		<p>Text analysis runs on the server without storing your entries. Your words are yours.</p>
+	</div>
+	<div class="card">
+		<h3>Actionable insights</h3>
+		<p>See stress level, sentiment, and key themes extracted from your reflection.</p>
+	</div>
+	<div class="card">
+		<h3>Gentle guidance</h3>
+		<p>Breathing, mindfulness, and study tips tailored to how you feel.</p>
+	</div>
+</section>
+{% endblock %}
+
+

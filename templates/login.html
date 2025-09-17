@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Login · Mindful Mentor{% endblock %}
+{% block content %}
+<section class="journal">
+	<h2>Welcome back</h2>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, msg in messages %}
+				<div class="banner {{ category }}">{{ msg }}</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<form method="post" class="journal-form">
+		<input type="text" name="username" placeholder="Username" required style="width:100%; padding:0.75rem; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background: var(--card); color: var(--text);" />
+		<input type="password" name="password" placeholder="Password" required style="width:100%; margin-top:0.5rem; padding:0.75rem; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background: var(--card); color: var(--text);" />
+		<div class="actions">
+			<button class="btn btn-primary" type="submit">Login</button>
+			<a class="btn" href="{{ url_for('signup') }}">Create account</a>
+		</div>
+	</form>
+</section>
+{% endblock %}
+
+

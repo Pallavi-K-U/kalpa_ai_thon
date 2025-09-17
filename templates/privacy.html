@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Mindful Mentor · Privacy{% endblock %}
+{% block content %}
+<section class="privacy">
+	<h2>Privacy-first design</h2>
+	<p class="muted">Your reflections are yours. This app is intentionally built with minimal data handling.</p>
+
+	<h3>What we collect</h3>
+	<ul class="list">
+		<li><strong>Journal text</strong>: sent to process your request and generate insights.</li>
+		<li><strong>Technical logs</strong>: basic server logs for reliability (no journal content).</li>
+	</ul>
+
+	<h3>How your data is used</h3>
+	<ul class="list">
+		<li>Not logged in: entries are processed and discarded.</li>
+		<li>Logged in: if you use the feature, entries are stored in your account and can be deleted by you.</li>
+		<li>No ads, no third‑party analytics, and no user tracking.</li>
+	</ul>
+
+	<h3>Your choices</h3>
+	<ul class="list">
+		<li>Use a nickname; avoid sharing personal details in journal text.</li>
+		<li>You may clear your browser history and cache after use.</li>
+	</ul>
+
+	<h3>Security</h3>
+	<ul class="list">
+		<li>Transport security is recommended when deployed (HTTPS).</li>
+		<li>No accounts or databases are used in this demo to reduce risk.</li>
+	</ul>
+
+	<p class="muted">Wellness notice: This is not medical advice. If you are in crisis, contact local emergency services or a trusted adult immediately.</p>
+</section>
+{% endblock %}
+
+

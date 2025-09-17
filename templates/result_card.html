@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Mindful Mentor · Results{% endblock %}
+{% block content %}
+<section class="results">
+	<h2>Your insights</h2>
+	<div class="grid">
+		<div class="panel">
+			<h3>Overview</h3>
+			<ul class="metrics">
+				<li><strong>Sentiment:</strong> {{ analysis.sentiment|capitalize }}</li>
+				<li><strong>Stress score:</strong> {{ analysis.stress_score }}</li>
+				<li><strong>Top keywords:</strong> {{ ", ".join(analysis.top_keywords) if analysis.top_keywords else "—" }}</li>
+			</ul>
+		</div>
+		<div class="panel">
+			<h3>Recommendations</h3>
+			{% for group, items in recommendations.items() %}
+			<div class="rec-group">
+				<h4>{{ group }}</h4>
+				<ul>
+				{% for item in items %}
+					<li>{{ item }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="cta">
+		<a class="btn" href="{{ url_for('journal') }}">Analyze another entry</a>
+		{% if current_user.is_authenticated %}
+			<form method="post" action="{{ url_for('journal') }}" style="display:inline"></form>
+			<span class="muted">Saved to your account automatically.</span>
+		{% else %}
+			<span class="muted">Login to save to your account.</span>
+		{% endif %}
+		<a class="btn btn-primary" href="{{ url_for('index') }}">Back to Home</a>
+	</div>
+</section>
+{% endblock %}
+
+

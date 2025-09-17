@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}History · Mindful Mentor{% endblock %}
+{% block content %}
+<section class="journal">
+	<h2>My History (account)</h2>
+	<p class="muted">Entries are tied to your account on this server. You can remove them any time.</p>
+	<div class="panel">
+		{% if not entries %}
+			<p class="muted">No saved entries yet.</p>
+		{% else %}
+			{% for e in entries %}
+				<div class="card" style="margin-bottom:8px;">
+					<div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+						<div>
+							<strong>{{ e['created_at'] }}</strong>
+							<div class="muted">Stress: {{ e['stress_score'] }} | Sentiment: {{ e['sentiment']|capitalize }}</div>
+						</div>
+						<form method="post" action="{{ url_for('delete_entry', entry_id=e['id']) }}">
+							<button class="menu-item" type="submit">Delete</button>
+						</form>
+					</div>
+					<details style="margin-top:6px;"><summary>View text</summary><p class="muted">{{ e['text'] }}</p></details>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+</section>
+{% endblock %}
+
+

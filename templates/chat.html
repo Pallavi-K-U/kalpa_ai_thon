@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Mood Mentor{% endblock %}
+{% block content %}
+<section class="journal">
+    <h2>Mood Mentor</h2>
+	<div id="chat-box" class="panel" style="max-height:360px; overflow:auto; display:flex; flex-direction:column; gap:8px;"></div>
+	<form id="chat-form" class="journal-form" style="display:flex; gap:8px; align-items:center;">
+		<input id="chat-input" type="text" placeholder="Type how you feel..." required style="flex:1; padding:0.8rem; border-radius:10px; border:1px solid rgba(0,0,0,0.12); background: var(--card); color: var(--text);" />
+		<button class="btn btn-primary" type="submit">Send</button>
+	</form>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	const box = document.getElementById('chat-box');
+	const form = document.getElementById('chat-form');
+	const input = document.getElementById('chat-input');
+
+	function add(role, text) {
+		const wrap = document.createElement('div');
+		wrap.className = 'card';
+		wrap.style.padding = '0.6rem 0.8rem';
+		wrap.innerHTML = `<strong>${role === 'user' ? 'You' : 'Mentor'}</strong><div class="muted">${text}</div>`;
+		box.appendChild(wrap);
+		box.scrollTop = box.scrollHeight;
+	}
+
+	add('bot', "Hi! I'm here to listen. What's on your mind?");
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const msg = input.value.trim();
+		if (!msg) return;
+		add('user', msg);
+		input.value = '';
+		const formData = new FormData();
+		formData.append('message', msg);
+		const res = await fetch('{{ url_for('api_chat') }}', { method: 'POST', body: formData });
+		const data = await res.json();
+		add('bot', data.reply);
+	});
+});
+</script>
+{% endblock %}
+
+
